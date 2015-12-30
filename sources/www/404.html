@@ -1,20 +1,77 @@
-<!DOCTYPE html><html lang="fr">
-<head>
-<title>Open Karotz</title>
-<meta charset="utf-8">
-</head>
-<body>
-<center>
-<font face="Arial Black">
-<H1>Error 404 - File not found !</H1>
-<A href="/test_api.html"> 
-<IMG width=40%" SRC='/images/404.jpg'>
-</A></IMG>
-<BR>
-<P>
-<P>
-</font>
-</center> 
-</body>
-</html>
+﻿<html>
+	<head>
+		<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.jpg" />
+		<title>OpenKontrol</title>
+		<link rel="stylesheet" href="style.css" TYPE="text/css">
+		<link rel="stylesheet" href="css/bootstrap.css" TYPE="text/css">
+	</head>
+	<body>
+		<div class="container">
+            <h2><span class="label label-info">OpenKontrol</span></h2>
+						<h1>404 - Page not found</h1>
+		</div>
+		<small>Made by <strong>Massallia</strong>, interface simplified and bootstraped by <strong><a href="www.tobios.org">Tobios</a></strong>.</small>
+	</body>
+    <footer>
+        <!-- On met les scripts à la fin du code pour charger plus rapidement le HTML -->
+        <script type="text/javascript">
+            function speak_tts() {
+                $("#alert").fadeTo(0, 500).slideDown(500, function(){$(this).show();});
+                window.setTimeout(function() {
+                    $("#alert").fadeTo(500, 0).slideUp(500, function(){
+                        $(this).hide();
+                    });
+                }, 4000);
 
+                var tts = findSelection("tts");
+                dest = document.getElementById('dest').value;
+                window.open(
+              'cgi-bin/tts?text='+dest+'&voice='+tts,
+              'result'
+                );
+            }
+
+            function findSelection(field) {
+                var tts = document.getElementsByName(field);
+                var sizes = tts.length;
+
+
+                    for (i=0; i < sizes; i++) {
+                        if (tts[i].checked==true) {
+                        return tts[i].value;
+                    }
+                }
+            }
+
+        </script>
+        <script type="text/javascript">
+            function radio() {
+                var play = findSelection("play");
+                var the_form = document.forms['radiof'];
+                if(play=='other') {
+                    play = the_form.link.value;
+                }
+                window.open(
+                    'cgi-bin/sound?url='+play,
+                    'result'
+                );
+
+            }
+
+            function findSelection(field) {
+                var play = document.getElementsByName(field);
+                var sizes = play.length;
+
+
+                    for (i=0; i < sizes; i++) {
+                        if (play[i].checked==true) {
+                        return play[i].value;
+                    }
+                }
+            }
+        </script>
+        <script src="js/jquery-2.0.3.js"></script>
+        <script src="js/bootstrap.js"></script>
+    </footer>
+</html>

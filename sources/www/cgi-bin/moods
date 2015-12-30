@@ -5,8 +5,41 @@ source /usr/www/cgi-bin/url.inc
 source /usr/www/cgi-bin/utils.inc
 source /usr/www/cgi-bin/ears.inc
 
-Log "[MOODS]" "Obsolete Moods Function Called"
+KillProcess
+ReadUrlParam
 
-DATA='{"moods":"'$MOODS'","msg":"Obsolete, Moods is now an Application. Use /cgi-bin/apps/moods now.","return":"1"}'
+MOODS_ID=${URLParam[id]}
+LANG=${URLParam[lang]}
+if [ "$LANG" = "" ]; then
+   LANG="fr"
+fi
+
+if [ "$MOODS_ID" = "" ]; then
+    r=$RANDOM
+    MOODS=$(( r %= 399 )) 
+else
+    MOODS=$MOODS_ID    
+fi    
+
+if [ ! -e "$CNF_DATADIR/Moods/fr/${MOODS}.mp3" ]; then
+  DATA='{"return":"1","msg":"Moods not found"}'
+  SendResponse "$DATA"  
+  exit 0
+fi
+
+
+if [ ! -e "$CNF_DATADIR/Run/karotz.sleep" ]; then
+   EarsReset
+   if [ ! -e "$CNF_DATADIR/Moods/fr/${MOODS}.mp3" ]; then
+      DATA='{"return":"1","msg":"File not found."}'
+   else
+      PlaySound $CNF_DATADIR/Moods/fr/${MOODS}.mp3
+      DATA='{"moods":"'$MOODS'","return":"0"}'
+   fi
+else
+   DATA='{"return":"1","msg":"Unable to perform action, rabbit is sleeping."}'
+fi
+
 SendResponse "$DATA"
+
 

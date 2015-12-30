@@ -1,97 +1,466 @@
-<!DOCTYPE html><html lang="fr">
-<head>
-<title>Open Karotz</title>
-<meta charset="utf-8">
-<link rel="icon" type="image/png" href="/favicon.png" />
-<script src="/js/jquery-1.9.1.min.js"></script>
-<script src="/js/jquery-ui.min.js"></script>
-<script>
+﻿<html>
+	<head>
+		<link rel="icon" type="image/jpeg" href="/favicon.jpg" />
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.jpg" />
+		<title>OpenKontrol</title>
+		<link rel="stylesheet" href="style.css" TYPE="text/css">
+		<link rel="stylesheet" href="css/bootstrap.css" TYPE="text/css">
+	</head>
+	<body>
+		<div class="container">
+            <h2><span class="label label-info">OpenKontrol</span></h2>
+            <br>
+			<div class="tabbable">
+				<ul class="nav nav-tabs nav-justified">
+					<li class="active"><a href="#state" data-toggle="tab">Karotz <span class="glyphicon glyphicon-home"/></a></li>
+					<li><a href="#leds" data-toggle="tab">LED <span class="glyphicon glyphicon-certificate"/></a></li>
+					<li><a href="#tts" data-toggle="tab">TTS <span class="glyphicon glyphicon-comment"/></a></li>
+					<li><a href="#radio" data-toggle="tab">Radio <span class="glyphicon glyphicon-headphones"/></a></li>
+					<li><a href="#ears" data-toggle="tab">Ears <span class="glyphicon glyphicon-resize-horizontal"/></a></li>
+					<li><a href="#rfid" data-toggle="tab">RFID <span class="glyphicon glyphicon-tags"/></a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="state">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>State  <span class="glyphicon glyphicon-home"/></h2>
+                                <ul>
+                                    <a target="result" href="cgi-bin/wakeup?silent=1"> 
+                                        <img width="50px" SRC='img/turn on.png' alt="Wake up the karotz"/>
+                                    </a>
+                                    <a target="result" href="cgi-bin/sleep"> 
+                                        <img width="50px" SRC='img/turn off.png' alt="Shutdown the karotz"/>
+                                    </a>
+                                    <a target="result" href="cgi-bin/reboot"> 
+                                        <img width="50px" SRC='img/restart.png' alt="Reboot the karotz"/>
+                                    </a>
+                                    <!-- <LI><A target="result" HREF="/cgi-bin/status">Status</A></LI>-->
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <h2>Advanced <span class="glyphicon glyphicon-cog"/></h2>
+                                    <!-- <a class="btn btn-success" target="result" href="/cgi-bin/update_kontrol">
+                                        <span class="glyphicon glyphicon-refresh"></span> Update
+                                    </a> -->
+                                    <!--
+                                    <LI><A target="result" HREF="/cgi-bin/update?usb=1">Update (Scripts & Usb Key)</A></LI>
+                                    </UL>
+                                    <UL>Forced 
+                                    <LI><A target="result" HREF="/cgi-bin/update?force=1">Update (Scripts)</A></LI>
+                                    <LI><A target="result" HREF="/cgi-bin/update?force=1&usb=1">Update (Scripts & Usb Key)</A></LI>
+                                    -->
+                               
+                                <UL>Installation
+                                    <LI><A target="result" HREF="/cgi-bin/reset_install_flag">Reset Installation Flag</A></LI>
+                                </UL>
+                                <!-- <a class="btn btn-primary" target="result" href="/cgi-bin/speak_time">
+                                  <span class="glyphicon glyphicon-time"></span> Say the hour automatically
+                                </a>
+                                <br>
+                                <br> -->
+                                <a class="btn btn-danger" target="result" href="/cgi-bin/clear_cache">
+                                  <span class="glyphicon glyphicon-trash"></span> Clear TTS Cache
+                                </a>
+                            </div>
+                        </div>
+					</div>
 
-function isMobile() {
- try {
-    if(/Android|webOS|iPhone|iPad|iPod|pocket|psp|kindle|avantgo|blazer|midori|Tablet|Palm|maemo|plucker|phone|BlackBerry|symbian|IEMobile|mobile|ZuneWP7|Windows Phone|Opera Mini/i.test(navigator.userAgent)) {
-     return true;
-    };
-    return false;
- } catch(e){ return false; }
-}
+					<div class="tab-pane" id="leds">
+						<h2>Led <span class="glyphicon glyphicon-certificate"/></h2>
+						<h4>Command LED <a class="btn btn-danger" target="result" HREF="/cgi-bin/leds?color=000000">Off</a></h2>
+						<br>
+						<strong>Fixed</strong>
+						<br>
+						<A target="result" HREF="/cgi-bin/leds?color=FF0000"><img src="img/red.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?color=77FF00"><img src="img/yellow.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?color=FFFF00"><img src="img/orange.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?color=00FF00"><img src="img/green.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?color=0000FF"><img src="img/blue.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?color=FF00FF"><img src="img/pink.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?color=00FFFF"><img src="img/blue2.png"></A>
+						<br>
+						<strong>Pulse</strong>
+						<br>
+						<A target="result" HREF="/cgi-bin/leds?pulse=1&color=FF0000"><img src="img/red.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?pulse=1&color=77FF00"><img src="img/yellow.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?pulse=1&color=FFFF00"><img src="img/orange.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?pulse=1&color=00FF00"><img src="img/green.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?pulse=1&color=0000FF"><img src="img/blue.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?pulse=1&color=FF00FF"><img src="img/pink.png"></A>
+                        <A target="result" HREF="/cgi-bin/leds?pulse=1&color=00FFFF"><img src="img/blue2.png"></A>
+					</div>
+					 
+					 
+					<div class="tab-pane" id="tts">
+						<h2>TTS <span class="glyphicon glyphicon-comment"/></h2>
+                        <div id="alert" class="alert alert-success alert-dismissable" style="display:none;">
+                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                          <strong>Great !</strong> The message was sent successfully !
+                        </div>
+						<form name="tts" method="post" onsubmit="return speak_tts();" >
+							<div class="input-group">
+								<input type="text" name="dest" id="dest" value="Je suis un lapin libre !" class="form-control"/>
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" id="speak" name="speak" value="speak" onclick="speak_tts()">
+										<img class="image" width="20px" src="img/tts.png"/>
+									</button>
+								</span>
+							</div>
+							<br>
+							<div class="btn-group btn-group-justified" data-toggle="buttons">
+								<label class="btn btn-primary">
+									<input type="radio" name="tts" value="claire" checked/>Claire<br>
+								</label>			
+								<label class="btn btn-primary">								
+									<input type="radio" name="tts" value="margaux"/>Margaux<br>
+								</label>
+								<label class="btn btn-primary">
+									<input type="radio" name="tts" value="margauxsad"/>Margaux Sad<br>
+								</label>
+								<label class="btn btn-primary">
+									<input type="radio" name="tts" value="margauxhappy"/>Margaux Happy<br>
+								</label>
+								<label class="btn btn-primary">
+									<input type="radio" name="tts" value="antoine"/>Antoine<br>
+								</label>
+								<label class="btn btn-primary">
+									<input type="radio" name="tts" value="bruno"/>Bruno<br>
+								</label>
+								<label class="btn btn-primary">
+									<input type="radio" name="tts" value="alice"/>Alice<br>
+								</label>
+								<label class="btn btn-primary">
+									<input type="radio" name="tts" value="julie"/>Julie<br>
+								</label>	
+							</div>
+						</form>
+					</div>
+					  
+					   
+					<div class="tab-pane" id="radio">
+						<h2>Radio <span class="glyphicon glyphicon-headphones"/></h2>
+						<form name="radiof" method="post" onsubmit="return radio();">
+							<div class="btn-group text-center" align="center">
+								<button type="button" class="btn btn-info" name="play" value="Play" onclick="radio()">
+									<img width="30px" src="img/play.png"/>
+								</button>
+								<A target="result" class="btn btn-warning" HREF='/cgi-bin/sound_control?cmd=quit'><IMG width='30px' SRC='img/stop.png'/></A>
+							</div>
+							<br>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                                    Music <span class="caret"/>
+                                  </button>
+                                  <ul class="dropdown-menu dropdown-menu-form" role="menu">
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://stream5.nrj.yacast.net/virginradio" checked/>Virgin Radio
+                                    </label>
+    
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://mp3.live.tv-radio.com/rire_et_chansons/all/rir_124629.mp3" />Rire & Chanson
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://mp3.live.tv-radio.com/cherie_fm/all/che_124310.mp3"/>Chérie FM
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://streaming.radio.rtl2.fr/rtl2-1-44-96"/>RTL2
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://www.tv-radio.com/station/le_mouv_mp3/le_mouv_mp3-128k"/>Le mouv'
+                                    </label>
+                                  </ul>
+                                </div>
+                                
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                    Info <span class="caret"/>
+                                  </button>
+                                  <ul class="dropdown-menu dropdown-menu-form" role="menu">
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://vipicecast.yacast.net/rmc" checked/>RMC
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://streaming.radio.rtl.fr/rtl-1-44-96" />RTL
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://vipicecast.yacast.net/europe1"/>Europe 1
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://95.81.146.2/franceinfo/all/franceinfo.mp3"/>France Info
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="play" value="http://95.81.146.2/franceinter/all/franceinterhautdebit.mp3"/>France Inter
+                                    </label>
+                                  </ul>
+                                </div>
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input name="play" value="other" type="radio">
+                                        </span>
+                                        <input type="text" name="link" class="form-control" placeholder="Or enter a mp3's url">
+                                    </div>
+                                </div>
+                            </div>
+						</form>
+					</div>       
+					  
+					<div class="tab-pane" id="ears">
+						<h2>Ears</h2>
+						<UL>
+							<LI><A target="result" HREF='/cgi-bin/ears_reset'>Reset</A></LI>
+							<LI><A target="result" HREF='/cgi-bin/ears_random'>Random Ears</A></LI>
+							<LI><A target="result" HREF='/cgi-bin/ears?left=5&right=5'>Horizontal Ears</A></LI>
+							<br>
+							<LI><A target="result" HREF='/cgi-bin/ears_mode?disable=1'>Disable ears</A></LI>
+							<LI><A target="result" HREF='/cgi-bin/ears_mode?disable=0'>Enable Ears</A></LI>
+						</UL>
+					</div>
+								 
+					<div class="tab-pane" id="rfid">
+						<h2>RFID <span class="glyphicon glyphicon-tags"/></h2>
+						<br>
+						<div class="panel-group" id="assign_rfid">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#assign_rfid" href="#assign_url">Assign tag to URL</a></h4>
+                                        </div>
+                                        <div id="assign_url" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <FORM target="result" METHOD="GET" ACTION="cgi-bin/rfid_assign_url" ENCTYPE="x-www-form-urlencoded" class="form-inline">
+                                                    <TABLE>
+                                                        <TR>
+                                                            <TD>Tag ID:
+                                                            <TD>
+                                                            <INPUT name="tag" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>URL:
+                                                            <TD>
+                                                            <INPUT name="url" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Name:
+                                                            <TD>
+                                                            <INPUT name="name" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                        
+                                                        <TD COLSPAN="2">
+                                                            <br>
+                                                            <INPUT type="submit" class="btn btn-primary" value="Submit">
+                                                        </TR>
+                                                    </TABLE>
+                                                </FORM>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#assign_rfid" href="#assign_eedomus">Assign tag to Eedomus macro</a></h4>
+                                        </div>
+                                        <div id="assign_eedomus" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <FORM target="result" METHOD="GET" ACTION="cgi-bin/rfid_assign_eedomus_macro" ENCTYPE="x-www-form-urlencoded" class="form-inline">
+                                                    <TABLE>
+                                                        <TR>
+                                                            <TD>Tag ID:
+                                                            <TD>
+                                                            <INPUT name="tag" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Eedomus IP:
+                                                            <TD>
+                                                            <INPUT name="ip" placeholder="We use local API" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Scene ID:
+                                                            <TD>
+                                                            <INPUT name="macro" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Api User:
+                                                            <TD><INPUT name="user" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Api Secret:
+                                                            <TD><INPUT type="password" name="password" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Name:
+                                                            <TD><INPUT name="name" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD COLSPAN="2">
+                                                            <br>
+                                                            <INPUT type="submit" class="btn btn-primary" value="Submit">
+                                                        </TR>
+                                                    </TABLE>
+                                                </FORM>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#assign_rfid" href="#assign_vera">Assign tag to Vera scene</a></h4>
+                                        </div>
+                                        <div id="assign_vera" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <form target="result" METHOD="GET" ACTION="cgi-bin/rfid_assign_vera_scene" ENCTYPE="x-www-form-urlencoded" class="form-inline">
+                                                    <table>
+                                                        <TR>
+                                                            <TD>Tag ID:
+                                                            <TD>
+                                                            <INPUT name="tag" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Vera IP:
+                                                            <TD>
+                                                            <INPUT name="ip" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Scene ID:
+                                                            <TD>
+                                                            <INPUT name="scene" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD>Name:
+                                                            <TD><INPUT name="name" class="form-control input-sm">
+                                                        </TR>
+                                                        <TR>
+                                                            <TD COLSPAN="2">
+                                                            <INPUT type="submit" class="btn btn-primary" value="Submit">
+                                                        </TR>
+                                                    </table>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                            <br>
+                            <UL>
+                                <LI><A target="result" HREF='/cgi-bin/rfid_start_record'>Start RFID Tag recording</A></LI>
+                                <LI><A target="result" HREF='/cgi-bin/rfid_stop_record'>Stop RFID Tag recording</A></LI>
+                            </UL>
+                            
+                            <UL>
+                                <LI><A target="result" HREF="/cgi-bin/rfid_list">Registred Tag List</A></LI>
+                                <!-- <LI><A HREF='/rfid_info.html'>Get Tag Informations</A></LI>
+                                <LI><A HREF='/rfid_unassign.html'>Unassign Tag</A></LI> -->
+                                <LI><A HREF='/cgi-bin/rfid_backup'>Backup RFID Informations</A></LI>
+                            </UL>
+                        
+                            
+                        </div>
+                    </div>
+					 
+					<div class="tab-pane" id="settings">
+						<h2>Advanced</h2>
+						<UL>
+							<LI><A target="result" HREF="/cgi-bin/update?usb=1">Update</A></LI>
 
-		$.getJSON("/cgi-bin/get_version", function(data) 
-		{
-			if ( parseInt(data.return) == 0)
-			{
-				$("#about_version").text( "Version : " + data.patch_version);
-			}
-			else
-			{
-			}
-		});	
+							<!--
+							<LI><A target="result" HREF="/cgi-bin/update?usb=1">Update (Scripts & Usb Key)</A></LI>
+							</UL>
+							<UL>Forced 
+							<LI><A target="result" HREF="/cgi-bin/update?force=1">Update (Scripts)</A></LI>
+							<LI><A target="result" HREF="/cgi-bin/update?force=1&usb=1">Update (Scripts & Usb Key)</A></LI>
+							-->
+						</UL>
+						<UL>Installation
+							<LI><A target="result" HREF="/cgi-bin/reset_install_flag">Reset Installation Flag</A></LI>
+						</UL>
+                        <a class="btn btn-danger" target="result" href="/cgi-bin/clear_cache">
+                          <span class="glyphicon glyphicon-trash"></span> Clear TTS Cache
+                        </a>
+					</div>
+				</div>
 
+				<br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+				        <h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#show_reply" href="#show_reply">View Reply <span class="glyphicon glyphicon-hand-left"/></a></h4>
+				    </div>
+				    <div id="show_reply" class="panel-collapse collapse">
+                        <div class="panel-body">
+                                <iframe NAME="result" width="100%"></iframe>
+                        </div>
+                    </div>
+                </div>
+			</div> 
+		</div>
+		<small>Made by <strong>Massallia</strong>, interface simplified and bootstraped by <strong><a href="www.tobios.org">Tobios</a></strong>.</small>
+	</body>
+    <footer>
+        <!-- On met les scripts à la fin du code pour charger plus rapidement le HTML -->
+        <script type="text/javascript">
+            function speak_tts() {
+                $("#alert").fadeTo(0, 500).slideDown(500, function(){$(this).show();});
+                window.setTimeout(function() {
+                    $("#alert").fadeTo(500, 0).slideUp(500, function(){
+                        $(this).hide(); 
+                    });
+                }, 4000);
 
-$(document).ready(function() {
-	$("#logo").on('click', function ()
-	{
-		/*
-		if ( !isMobile() )
-		*/
-		window.location="/api.html"
-		/*
-		else
-		window.location="/mui/index.html"
-		*/
-	});
-	
-	$("#mobile").on('click', function () { window.location="/mui/index.html" });
-	$("#web").on('click', function () { window.location="/api.html" });
-	$('#mobile').button();
-	$('#web').button();
-	
-}); 
+                var tts = findSelection("tts");
+                dest = document.getElementById('dest').value;
+                window.open(
+              'cgi-bin/tts?text='+dest+'&voice='+tts,
+              'result' 
+                );
+            }
+            
+            function findSelection(field) {
+                var tts = document.getElementsByName(field);
+                var sizes = tts.length;
+    
+                
+                    for (i=0; i < sizes; i++) {
+                        if (tts[i].checked==true) {     
+                        return tts[i].value;
+                    }
+                }
+            }
 
-</script>
-
-</head>
-<body>
-<font face="Arial Black">
-<center>
-<noscript><H1><B>JavaScript Must be enabled !</B></H1></noscript> 
-<P>
-</font>
-<font face="Arial">
-<table border="0">
-<tr>
-	<td colspan="2">
-	<IMG style="cursor:pointer" SRC='/images/OpenKarotz.png' id="logo"></IMG>
-	</td>
-</tr>
-<tr>
-	<td colspan="2" align="center">
-    <B><font color="4E82C4">
-	<div id="about_version" width="100%"></div>
-    </font>
-    </B>
-	</td>
-</tr>
-<tr>
-	<td colspan="2" align="center">
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="JQB5QFW5EPFYN">
-<input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
-<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-</form>
-    </td>
-</tr>
-</table>
-<BR>
-
-<B><font color="4E82C4">Mass</font>alia 20<font color="4E82C4">14</font></B>
-<BR>
-<A HREF="wtfpl.txt"><IMG border="0" SRC=wtfpl-badge-1.png></A>
-</font>
-
-
-</center> 
-</body>
+        </script>
+        <script type="text/javascript">
+            function radio() {
+                var play = findSelection("play");
+                var the_form = document.forms['radiof'];
+                if(play=='other') {
+                    play = the_form.link.value;
+                }
+                window.open(
+                    'cgi-bin/sound?url='+play,
+                    'result' 
+                );
+                
+            }
+    
+            function findSelection(field) {
+                var play = document.getElementsByName(field);
+                var sizes = play.length;
+    
+                
+                    for (i=0; i < sizes; i++) {
+                        if (play[i].checked==true) {     
+                        return play[i].value;
+                    }
+                }
+            }
+        </script>
+        <script src="js/jquery-2.0.3.js"></script>
+        <script src="js/bootstrap.js"></script>
+    </footer>
 </html>
-

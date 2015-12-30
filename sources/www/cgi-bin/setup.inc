@@ -6,7 +6,7 @@
 CNF_MAX_CACHE_SIZE=100
 
 # File Location
-CNF_DATADIR="/usr/openkarotz"
+CNF_DATADIR="/mnt/usbkey"
 
 # Disable Ears
 CNF_EARS_DISABLED=0
@@ -22,11 +22,3 @@ CNF_BREEZE_COLOR=00FF00
 # F : Female
 CNF_GENDER=F
 
-# Version
-CNF_VERSION="210"
-
-# Root URL
-CNF_ROOT_URL="http://karotz.filippi.org"
-
-# Base URL
-CNF_BASE_URL="$CNF_ROOT_URL/$CNF_VERSION"

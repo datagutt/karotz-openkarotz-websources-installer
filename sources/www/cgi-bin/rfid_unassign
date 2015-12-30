@@ -9,6 +9,9 @@ ReadUrlParam
 
 
 TAG_ID=${URLParam[tag]}
+#VERA_IP=${URLParam[ip]}
+#SCENE_ID=${URLParam[scene]}
+#NAME=${URLParam[name]}
 
 if [ "$TAG_ID" == "" ]; then 
    DATA='{"return":"1","msg":"Missing mandatory parameters."}'
@@ -22,12 +25,13 @@ if [ ! -e "$CNF_DATADIR/Rfid/$TAG_ID.rfid" ]; then
    exit 0
 fi 
       
-# Clear existing information
-rm -f $CNF_DATADIR/Rfid/$TAG_ID.cmd 
-rm -f $CNF_DATADIR/Rfid/$TAG_ID.var
-rm -f $CNF_DATADIR/Rfid/$TAG_ID.action 
-rm -f $CNF_DATADIR/Rfid/$TAG_ID.name 
 
-DATA='{"return":"0","tag":"'$TAG_ID'"}'   
+# Clear existing information
+rm -f $CNF_DATADIR/Rfid/$TAG_ID.cmd >>/dev/null 2>>/dev/null
+rm -f $CNF_DATADIR/Rfid/$TAG_ID.var>>/dev/null 2>>/dev/null
+rm -f $CNF_DATADIR/Rfid/$TAG_ID.action >>/dev/null 2>>/dev/null
+rm -f $CNF_DATADIR/Rfid/$TAG_ID.name >>/dev/null 2>>/dev/null
+
+DATA='{"return":"0"}'   
 SendResponse "$DATA"
 

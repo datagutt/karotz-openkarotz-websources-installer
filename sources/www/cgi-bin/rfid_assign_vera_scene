@@ -4,6 +4,7 @@ source /www/cgi-bin/setup.inc
 source /www/cgi-bin/url.inc
 source /www/cgi-bin/utils.inc
 
+KillProcess
 ReadUrlParam
 
 TAG_ID=${URLParam[tag]}
@@ -11,9 +12,11 @@ VERA_IP=${URLParam[ip]}
 SCENE_ID=${URLParam[scene]}
 NAME=${URLParam[name]}
 
-CheckMandatoryParameter "$TAG_ID" tag
-CheckMandatoryParameter "$VERA_IP" ip
-CheckMandatoryParameter "$SCENE_ID" scene
+if [ "$TAG_ID" == "" ] ||  [ "$VERA_IP" == "" ] ||  [ "$SCENE_ID" == "" ]; then
+    DATA='{"return":"1","msg":"Missing mandatory parameters."}'
+    SendResponse "$DATA"
+    exit 0 
+fi
 
 if [ ! -e "$CNF_DATADIR/Rfid/$TAG_ID.rfid" ]; then
    DATA='{"return":"1","msg":"Tag ID not found."}'

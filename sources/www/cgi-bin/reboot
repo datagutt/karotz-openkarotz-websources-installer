@@ -7,7 +7,7 @@ source /www/cgi-bin/leds.inc
 source /www/cgi-bin/ears.inc
 
 KillProcess
-#Leds FF0000 
+Leds FF0000 
 
 /sbin/reboot -d 10 &
 DATA='{"return":"0"}'

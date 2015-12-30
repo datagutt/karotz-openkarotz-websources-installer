@@ -45,17 +45,13 @@ UU=${URLParam[usb]}
 
 
 # Checking root Web
-if [ ! -d $UDIR/Apps ]; then
-   mkdir $UDIR/Apps >>/dev/null 2>>/dev/null
+if [ ! -d $UDIR/Moods ]; then
+   mkdir $UDIR/Moods >>/dev/null 2>>/dev/null
 fi
 
-if [ ! -d $UDIR/Apps/Moods ]; then
-   mkdir $UDIR/Apps/Moods >>/dev/null 2>>/dev/null
+if [ ! -d $UDIR/Moods/fr ]; then
+   mkdir $UDIR/Moods/fr >>/dev/null 2>>/dev/null
 fi
 
-if [ ! -d $UDIR/Apps/Moods/fr ]; then
-   mkdir $UDIR/Apps/Moods/fr >>/dev/null 2>>/dev/null
-fi
-
-Download $SURL /usbkey/Moods/fr $UDIR/Apps/Moods/fr Moods 5
+Download $SURL /usbkey/Moods/fr $UDIR/Moods/fr Moods 5
 

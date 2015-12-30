@@ -2,7 +2,6 @@
 
 source /www/cgi-bin/setup.inc
 source /www/cgi-bin/url.inc
-source /www/cgi-bin/url_ext.inc
 source /www/cgi-bin/utils.inc
 source /www/cgi-bin/tts.inc
 source /www/cgi-bin/leds.inc
@@ -10,49 +9,15 @@ source /www/cgi-bin/ears.inc
 source /www/cgi-bin/webcam.inc
 
 
-function urlEnc() {
-  for char in $(echo -n $* | xxd -c 1 -p -u); do 
-    printf "%%%s" $char
-  done
-}
-#dbus_EarsStep 0 0 30
-
-#cgi_getvars BOTH ALL
-#ReadUrlParam
-
-curl -l "http://192.168.253.196/cgi-bin/sound?id=/Chiffres/192"
-curl -l "http://192.168.253.196/cgi-bin/sound?id=/Chiffres/point"
-curl -l "http://192.168.253.196/cgi-bin/sound?id=/Chiffres/168"
-
-
-#SendResponse ""
-#echo $url
-#URL=`echo $url | base64 -d`
-#URL="curl -L -k -s -o /tmp/curlout \""$URL"\""
-#eval $URL
-#PARAM=$(echo $url | UrlEncode )
-
-#echo "url:"$url
-#echo "url:"$URL
-#echo "name:"$name
-
-#A=$(IsSoundPlaying)
-#echo $A
-
-exit
-
-# $test2GetCurlError 7 
-
 #Leds 557788 000000 1
 
-#TakeSnapshot 
+TakeSnapshot 
 
 #AcapelaTTS "Salut ca vas bien ?" "antoine22k"
 # dbus_led_pulse FF0000 00FF0
 
-#A=$(BuildVeraUrl 192.168.253.173 24 1)
-#GetCurlError $(GetUrl $A)
-
+#A=$(BuildVeraUrl 192.168.253.153 24)
+#GetUrl $A
 #ReadParam $CNF_DATADIR/Rfid/D0021A35038C3FEA.cmd -1
 
 #for f in $(cat /www/cgi-bin/www_filelist) ; do

@@ -9,8 +9,8 @@ ReadUrlParam
 
 #  LED_COLOR=${URLParam[color]}
 CL='{"cache":['
-
-NB=$(ls -1 -A $CNF_DATADIR/Tmp | grep '.txt' | grep -v '/$' | wc -l)
+find  $CNF_DATADIR/Tmp -name "*.txt" > $CNF_DATADIR/Tmp/tmplst 
+NB=$(cat $CNF_DATADIR/Tmp/tmplst | wc -l)
 if [ $NB -gt 0 ]; then 
   
    for f in $( ls $CNF_DATADIR/Tmp/*.txt  )

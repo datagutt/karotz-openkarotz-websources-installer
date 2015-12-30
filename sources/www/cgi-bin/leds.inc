@@ -20,7 +20,7 @@ ORANGE=FFA500
 #   return : nothing                                                                     
 # ---------------------------------------------------------------------------            
 function dbus_led_fixed {                                                                
-    UUID=$(cat /proc/sys/kernel/random/uuid)                                             
+    UUID=`cat /proc/sys/kernel/random/uuid`                                              
     dbus-send  --system --dest=com.mindscape.karotz.Led                                  \
        /com/mindscape/karotz/Led com.mindscape.karotz.KarotzInterface.light    \
        string:"$UUID" string:"$1"                                               
@@ -40,7 +40,7 @@ function dbus_led_pulse {
     else
       SPEED=$3
     fi
-    UUID=$(cat /proc/sys/kernel/random/uuid)                                              
+    UUID=`cat /proc/sys/kernel/random/uuid`                                              
     dbus-send --system --dest=com.mindscape.karotz.Led                                  \
             /com/mindscape/karotz/Led com.mindscape.karotz.KarotzInterface.pulse    \
             string:"$UUID" string:"$1" string:"$2" int32:$SPEED int32:-1            
@@ -62,9 +62,7 @@ function Leds {
    LED_PULSE=$3
    LED_NO_MEMORY=$4
    LED_SPEED=$5
- 
-   Log "[LEDS]"  "Led color $1,$2,$3"	
-  
+   
    if [ "$LED_PULSE" == "" ]; then
      LED_PULSE=0 
    fi
@@ -76,16 +74,11 @@ function Leds {
    # Led pulse
    if [ $LED_PULSE -eq 1 ]; then
       dbus_led_pulse $LED_COLOR $LED_COLOR_PULSE $LED_SPEED
-      
-      if [ $LED_NO_MEMORY -ne 1 ]; then
-        echo "1" > "$CNF_DATADIR/Run/led.pulse"
-      fi
+      echo "1" > "$CNF_DATADIR/Run/led.pulse"
     else
       # Led Fixe
       if [ -e "$CNF_DATADIR/Run/led.pulse" ]; then                               
-         if [ $LED_NO_MEMORY -ne 1 ]; then
-           rm "$CNF_DATADIR/Run/led.pulse"                                         
-      	fi
+         rm "$CNF_DATADIR/Run/led.pulse"                                         
       fi
       dbus_led_fixed $LED_COLOR                              	
    fi 
@@ -111,7 +104,7 @@ function LedsRestore {
     else                                                                      
        LED_COLOR=00FF00                                                      
     fi                                                                        
-    Leds $LED_COLOR 000000 $LED_PULSE                                               
+    Leds $LED_COLOR 000000 $LED_PULSE                                                
  }                                                                                                                                                                                                                                                                                                                                           
 
 
